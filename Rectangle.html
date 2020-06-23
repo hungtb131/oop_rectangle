@@ -3,28 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Retangle</title>
+
 </head>
 <body>
-<canvas id="myCanvas" width="1368" height="1152" style="border: 1px solid #d3d3d3">
+<canvas id="myCanvas" width="1600" height="800" style="border: 3px solid #d3d3d3">
     This browser not support canvas elements
 </canvas>
-<span id="sp1"></span>
 <script>
-    var i=0;
-    function draw_rectangle(){
-        var sp=document.getElementById("sp1");
-        var c=document.getElementById("myCanvas");
-        var ctx=c.getContext("2d");
-        ctx.fillStyle="#FF0000";
-        if(i<1000)
-            i++;
-        else
-            return;
-        ctx.fillRect(0,0,i,i/1.6424234);
-        sp.innerHTML=i+'x'+i/2;
-        setTimeout("draw_rectangle();",10);
+    let i=0;
+    function Rectangle(width, height){
+        this.width = parseInt(width);
+        this.height = parseInt(height);
     }
-    draw_rectangle();
+    Rectangle.prototype.Perimeter=function() {
+        return (this.width+this.height)*2
+    }
+    Rectangle.prototype.Area=function() {
+        return (this.width * this.height)
+    }
+    function drawRectangle(){
+        let ctx = document.getElementById("myCanvas").getContext("2d");
+        ctx.moveTo(0,0);
+        ctx.lineTo(width,0);
+        ctx.stroke();
+        ctx.lineTo(width,height);
+        ctx.stroke();
+        ctx.lineTo(0,height);
+        ctx.stroke();
+        ctx.lineTo(0,0);
+        ctx.stroke();
+
+    }
+    let width =+prompt('Nhập width ')
+    let height=+prompt('Nhập height')
+    let hcn = new Rectangle(width,height);
+    alert("Hình chữ nhật có : chiều dài là " + hcn.width + " chiều rộng là " + hcn.height+ " Chu vi là "+hcn.Perimeter()+" Diện tích là "+ hcn.Area());
+    drawRectangle();
+
 </script>
 </body>
 </html>
